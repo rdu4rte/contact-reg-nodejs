@@ -36,4 +36,5 @@ Ao iniciar a aplicação, realizar uma requisição POST no endpoint "https://lo
 ## Swagger Authentication
 
 Após gerar os clientes e logar na API utilizando o endpoint "https://localhost:3003/api/v1/auth/signin", clicar no botão "Authorize" no canto superior direito e adicionar o token APÓS a palavra "Bearer" e clicar em "Authorize".
-Exemplo: "Bearer <Token>"
+
+Exemplo: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
