@@ -1,13 +1,7 @@
 import * as dotenv from "dotenv";
+dotenv.config({ path: ".env" });
 
 export const nodeEnv: string = process.env.NODE_ENV;
-
-if (nodeEnv === "development") {
-  dotenv.config({ path: ".env" });
-} else {
-  dotenv.config({ path: ".env-sample" });
-}
-
 export const port: number = +process.env.PORT || +process.env.CUSTOM_PORT;
 
 // db
