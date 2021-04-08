@@ -5,8 +5,6 @@ import { CredentialsDTO } from "./dto/credentials.dto";
 import { IToken } from "./interface/token.interface";
 import { Auth } from "../../shared/utils/auth.utils";
 import { Validator } from "../../shared/utils/validator.utils";
-import { ClientMac } from "../client/entity/client-mac.entity";
-import { ClientVar } from "../client/entity/client-var.entity";
 
 @injectable()
 export class AuthService {
@@ -28,7 +26,6 @@ export class AuthService {
       });
 
     const user = await this.clientRepository.getByName(result.username);
-
     const isMatch = await this.auth.matchPasswords(user.password, result.password);
 
     if (user && isMatch) {

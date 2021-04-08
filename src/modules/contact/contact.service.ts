@@ -19,7 +19,7 @@ export class ContactService {
   public async insertContact(
     contactDto: ContactDTO,
     client: ClientVar | ClientMac,
-  ): Promise<{ detail: string; contact: ContactDTO }> {
+  ): Promise<{ detail: string; contact: string }> {
     const result = await this.validator.classValidation(ContactDTO, contactDto).then((validated: ContactDTO) => {
       if (validated) {
         return validated;
@@ -31,7 +31,12 @@ export class ContactService {
     await this.contactRepository.insertOne(db, result);
     return {
       detail: `User registered for DB: ${db === "macapa" ? "MYSQL/MACAPÁ" : "POSTGRESQL/VAREJÂO"}`,
-      contact: result,
+      contact: `Usuário: ${result.name}, Telefone: +${result.countryCode} (${result.ddd}) ${result.cellphone}`,
     };
+  }
+
+  // fetch contacts from both DBs
+  public async fetchContacts(): Promise<{ macapaContacts: ContactMac[]; varejaoContacts: ContactVar[] }> {
+    return await this.contactRepository.fetchContacts();
   }
 }

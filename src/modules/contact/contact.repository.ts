@@ -46,4 +46,15 @@ export class ContactRepository {
         });
     }
   }
+
+  // fetch users
+  public async fetchContacts(): Promise<{ macapaContacts: ContactMac[]; varejaoContacts: ContactVar[] }> {
+    const macContacts = await this.connMac.createQueryBuilder(ContactMac, "contact").getMany();
+    const varContacts = await this.connVar.createQueryBuilder(ContactVar, "contact").getMany();
+
+    return {
+      macapaContacts: macContacts,
+      varejaoContacts: varContacts,
+    };
+  }
 }

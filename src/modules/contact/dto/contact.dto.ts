@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsNumberString, IsString, Length } from "class-validator";
+import { IsNotEmpty, IsNumberString, IsString, Length, MaxLength, MinLength } from "class-validator";
 import { ApiModel, ApiModelProperty } from "swagger-express-ts";
 
 @ApiModel({
@@ -20,7 +20,7 @@ export class ContactDTO {
   @IsNotEmpty()
   @IsNumberString()
   @Length(2)
-  countryCode: number;
+  countryCode: string;
 
   @ApiModelProperty({
     description: "DDD",
@@ -29,7 +29,7 @@ export class ContactDTO {
   @IsNotEmpty()
   @IsNumberString()
   @Length(2)
-  ddd: number;
+  ddd: string;
 
   @ApiModelProperty({
     description: "Number",
@@ -37,5 +37,7 @@ export class ContactDTO {
   })
   @IsNotEmpty()
   @IsNumberString()
+  @MinLength(8)
+  @MaxLength(9)
   cellphone: string;
 }
