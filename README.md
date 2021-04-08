@@ -26,8 +26,5 @@ $ npm run start
 ```
 
 ## Endpoints
-- Root: https:localhost:3003/api/v1/
-- Swagger Docs: http://127.0.0.1:3003/api-docs/swagger
-
-## Autor
-Raul Duarte
+- Root: https://localhost:3003/api/v1/
+- Swagger Docs: http://localhost:3003/api-docs/swagger
