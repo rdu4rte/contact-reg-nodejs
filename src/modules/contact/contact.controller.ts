@@ -66,6 +66,54 @@ export class ContactController extends BaseHttpController {
     } catch (err) {
       return this.json({
         statusCode: 500,
+        message: `Failed to fetch contacts: ${err.message}`,
+      });
+    }
+  }
+
+  @ApiOperationGet({
+    description: "Fetch Contacts From Macapa DB",
+    path: "/macapa",
+    security: {
+      apiKeyHeader: [],
+    },
+    responses: {
+      200: { description: "Fetch Contacts" },
+      500: { description: "Failed To Fetch Contacts" },
+    },
+  })
+  @httpGet("/macapa", TYPES.JwtMiddleware)
+  public async fetchContactsFromMac(req: Request, res: Response, next: NextFunction): Promise<JsonResult> {
+    try {
+      const results = await this.contactService.fetchFromMac();
+      return this.json(results, 200);
+    } catch (err) {
+      return this.json({
+        statusCode: 500,
+        message: `Failed to fetch contact: ${err.message}`,
+      });
+    }
+  }
+
+  @ApiOperationGet({
+    description: "Fetch Contacts From Macapa DB",
+    path: "/varejao",
+    security: {
+      apiKeyHeader: [],
+    },
+    responses: {
+      200: { description: "Fetch Contacts" },
+      500: { description: "Failed To Fetch Contacts" },
+    },
+  })
+  @httpGet("/varejao", TYPES.JwtMiddleware)
+  public async fetchContactsFromVar(req: Request, res: Response, next: NextFunction): Promise<JsonResult> {
+    try {
+      const results = await this.contactService.fetchFromVar();
+      return this.json(results, 200);
+    } catch (err) {
+      return this.json({
+        statusCode: 500,
         message: `Failed to fetch contact: ${err.message}`,
       });
     }

@@ -27,4 +27,21 @@ export class Validator {
 
     return results;
   }
+
+  // treat cellphone string
+  public async treatPhoneNumber(db: string, cellphone: string): Promise<string> {
+    if (db === "varejao") {
+      return cellphone;
+    }
+
+    if (cellphone.length == 13) {
+      const countryCode = cellphone.slice(0, 2);
+      const ddd = cellphone.slice(2, 4);
+      const phone = cellphone.slice(4, 13);
+      const treated = `+${countryCode} (${ddd}) ${phone}`;
+
+      console.log(treated);
+      return treated;
+    }
+  }
 }

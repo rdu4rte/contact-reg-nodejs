@@ -14,30 +14,12 @@ export class ContactDTO {
   name: string;
 
   @ApiModelProperty({
-    description: "Country Code",
-    required: true,
-  })
-  @IsNotEmpty()
-  @IsNumberString()
-  @Length(2)
-  countryCode: string;
-
-  @ApiModelProperty({
-    description: "DDD",
-    required: true,
-  })
-  @IsNotEmpty()
-  @IsNumberString()
-  @Length(2)
-  ddd: string;
-
-  @ApiModelProperty({
     description: "Number",
     required: true,
   })
   @IsNotEmpty()
   @IsNumberString()
   @MinLength(8)
-  @MaxLength(9)
+  @MaxLength(13)
   cellphone: string;
 }

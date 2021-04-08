@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { ConnectionOptions, createConnections, DatabaseType } from "typeorm";
-import { pgHost, pgUser, pgPass, pgDb, msqlHost, msqlUser, msqlPass, msqlDb } from "../config/env.config";
+import { pgHost, pgUser, pgPass, pgDb, msqlHost, msqlUser, msqlPass, msqlDb, nodeEnv } from "../config/env.config";
 import Logger from "../config/logger.config";
 
 @injectable()
@@ -32,7 +32,8 @@ export const config1: ConnectionOptions = <ConnectionOptions>{
   password: pgPass,
   database: pgDb,
   synchronize: true,
-  entities: ["src/modules/**/entity/*-var.entity.ts"],
+  entities: [__dirname + "../../dist/src/modules/**/entity/*-var.entity.js"],
+  seeds: ["databaseed/"],
 };
 
 // mysql options
@@ -44,5 +45,6 @@ export const config2: ConnectionOptions = <ConnectionOptions>{
   password: msqlPass,
   database: msqlDb,
   synchronize: true,
-  entities: ["src/modules/**/entity/*-mac.entity.ts"],
+  entities: [__dirname + "../../dist/src/modules/**/entity/*-mac.entity.js"],
+  seeds: ["databaseed/"],
 };

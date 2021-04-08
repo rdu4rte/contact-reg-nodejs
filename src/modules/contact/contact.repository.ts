@@ -16,30 +16,32 @@ export class ContactRepository {
 
   // insert contact
   public async insertOne(db: string, contactDto: ContactDTO): Promise<any> {
-    const { name, countryCode, ddd, cellphone } = contactDto;
-
     if (db === "macapa") {
+      const entityMac = Object.assign(new ContactMac(), {
+        name: contactDto.name,
+        cellphone: contactDto.cellphone,
+      });
+
       return this.connMac
         .createQueryBuilder()
         .insert()
         .into(ContactMac)
-        .values({
-          name: name.toUpperCase(),
-          cellphone: `+${countryCode} (${ddd}) ${cellphone}`,
-        })
+        .values(entityMac)
         .execute()
         .then((value: InsertResult) => {
           return value;
         });
     } else if (db === "varejao") {
+      const entityVar = Object.assign(new ContactVar(), {
+        name: contactDto.name,
+        cellphone: contactDto.cellphone,
+      });
+
       return this.connVar
         .createQueryBuilder()
         .insert()
         .into(ContactVar)
-        .values({
-          name: name,
-          cellphone: `${countryCode}${ddd}${cellphone}`,
-        })
+        .values(entityVar)
         .execute()
         .then((value: InsertResult) => {
           return value;
@@ -56,5 +58,15 @@ export class ContactRepository {
       macapaContacts: macContacts,
       varejaoContacts: varContacts,
     };
+  }
+
+  // fetch from MySQL
+  public async fetchFromMac(): Promise<ContactMac[]> {
+    return this.connMac.createQueryBuilder(ContactMac, "contact").getMany();
+  }
+
+  // fetch from PostgreSQL
+  public async fetchFromVar(): Promise<ContactVar[]> {
+    return this.connVar.createQueryBuilder(ContactVar, "contact").getMany();
   }
 }

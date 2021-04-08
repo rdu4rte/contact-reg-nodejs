@@ -27,16 +27,27 @@ export class ContactService {
     });
 
     const db = client.name;
+    const treatedPhoneNumber = await this.validator.treatPhoneNumber(db, result.cellphone);
 
     await this.contactRepository.insertOne(db, result);
     return {
       detail: `User registered for DB: ${db === "macapa" ? "MYSQL/MACAPÁ" : "POSTGRESQL/VAREJÂO"}`,
-      contact: `Usuário: ${result.name}, Telefone: +${result.countryCode} (${result.ddd}) ${result.cellphone}`,
+      contact: `Usuário: ${result.name}, Telefone: ${treatedPhoneNumber}`,
     };
   }
 
   // fetch contacts from both DBs
   public async fetchContacts(): Promise<{ macapaContacts: ContactMac[]; varejaoContacts: ContactVar[] }> {
     return await this.contactRepository.fetchContacts();
+  }
+
+  // fetch from msql
+  public async fetchFromMac(): Promise<ContactMac[]> {
+    return this.contactRepository.fetchFromMac();
+  }
+
+  // fetch from msql
+  public async fetchFromVar(): Promise<ContactVar[]> {
+    return this.contactRepository.fetchFromVar();
   }
 }

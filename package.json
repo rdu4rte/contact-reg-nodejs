@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "NODE_ENV=development nodemon",
     "start": "NODE_ENV=production node ./dist/src/app.js",
-    "build": "rimraf ./dist && tsc"
+    "build": "rimraf ./dist && tsc",
+    "seed:import": "NODE_ENV=development node ./dist/src/seed -i",
+    "seed:delete": "NODE_ENV=development node ./dist/src/seed -d"
   },
   "repository": {
     "type": "git",
