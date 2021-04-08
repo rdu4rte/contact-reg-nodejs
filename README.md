@@ -1,4 +1,4 @@
-## Contact Register - Job Challanger (Mercafacil)
+## Contact Register - Job Challange (Mercafacil)
 
 NodeJS, TypeScript, InversifyJS, Express, TypeORM, PostgreSQL/MySQL, Authentication with JsonWebToken
 
@@ -28,3 +28,12 @@ $ npm run start
 ## Endpoints
 - Root: https://localhost:3003/api/v1/
 - Swagger Docs: http://localhost:3003/api-docs/swagger
+
+## Auto Generate Clients
+
+Ao iniciar a aplicação, realizar uma requisição POST no endpoint "https://localhost:3003/api/v1/client" para gerar os clientes dos bancos "Macapá"(MySQL) e "VareJão"(PostgreSQL) conforme orientado.
+
+## Swagger Authentication
+
+Após gerar os clientes e logar na API utilizando o endpoint "https://localhost:3003/api/v1/auth/signin", clicar no botão "Authorize" no canto superior direito e adicionar o token APÓS a palavra "Bearer" e clicar em "Authorize".
+Exemplo: "Bearer <Token>"
