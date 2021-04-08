@@ -52,8 +52,8 @@ export class ClientRepository {
 
   // fetch users
   public async fetchUsers(): Promise<{ macapaClients: ClientMac[]; varejaoClients: ClientVar[] }> {
-    const macClients = await this.connMac.createQueryBuilder(ClientMac, "client_mac").getMany();
-    const varClients = await this.connVar.createQueryBuilder(ClientVar, "client_var").getMany();
+    const macClients = await this.connMac.createQueryBuilder(ClientMac, "client").getMany();
+    const varClients = await this.connVar.createQueryBuilder(ClientVar, "client").getMany();
 
     return {
       macapaClients: macClients,
@@ -65,14 +65,14 @@ export class ClientRepository {
   public async getByName(name: string): Promise<ClientMac | ClientVar> {
     if (name === "macapa") {
       return await this.connMac
-        .createQueryBuilder(ClientMac, "client_mac")
-        .addSelect("client_mac.password")
+        .createQueryBuilder(ClientMac, "client")
+        .addSelect("client.password")
         .where({ name: name })
         .getOne();
     } else if (name === "varejao") {
       return await this.connVar
-        .createQueryBuilder(ClientVar, "client_var")
-        .addSelect("client_var.password")
+        .createQueryBuilder(ClientVar, "client")
+        .addSelect("client.password")
         .where({ name: name })
         .getOne();
     }

@@ -3,6 +3,7 @@ import { plainToClass } from "class-transformer";
 import { validate, ValidationError } from "class-validator";
 import { injectable } from "inversify";
 import Logger from "../../config/logger.config";
+import { ContactDTO } from "../../modules/contact/dto/contact.dto";
 
 @injectable()
 export class Validator {

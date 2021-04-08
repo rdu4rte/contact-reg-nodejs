@@ -2,7 +2,6 @@ import { IsNotEmpty, IsString } from "class-validator";
 import { ApiModel, ApiModelProperty } from "swagger-express-ts";
 
 @ApiModel({
-  description: "Login Credentials",
   name: "CredentialsDTO",
 })
 export class CredentialsDTO {
