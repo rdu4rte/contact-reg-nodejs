@@ -29,19 +29,21 @@ export class Validator {
   }
 
   // treat cellphone string
-  public async treatPhoneNumber(db: string, cellphone: string): Promise<string> {
+  public treatString(db: string, contact: ContactDTO): ContactDTO {
     if (db === "varejao") {
-      return cellphone;
+      return contact;
     }
 
-    if (cellphone.length == 13) {
-      const countryCode = cellphone.slice(0, 2);
-      const ddd = cellphone.slice(2, 4);
-      const phone = cellphone.slice(4, 13);
+    let cellphone;
+    if (contact.cellphone.length == 13) {
+      const countryCode = contact.cellphone.slice(0, 2);
+      const ddd = contact.cellphone.slice(2, 4);
+      const phone = contact.cellphone.slice(4, 13);
       const treated = `+${countryCode} (${ddd}) ${phone}`;
-
-      console.log(treated);
-      return treated;
+      cellphone = treated;
     }
+
+    const name = contact.name.toUpperCase();
+    return { name: name, cellphone: cellphone };
   }
 }

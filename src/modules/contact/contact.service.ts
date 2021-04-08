@@ -7,6 +7,7 @@ import { ContactMac } from "./entity/contact-mac.entity";
 import { ContactVar } from "./entity/contact-var.entity";
 import { ClientVar } from "../client/entity/client-var.entity";
 import { ClientMac } from "../client/entity/client-mac.entity";
+import * as fs from "fs";
 
 @injectable()
 export class ContactService {
@@ -27,12 +28,12 @@ export class ContactService {
     });
 
     const db = client.name;
-    const treatedPhoneNumber = await this.validator.treatPhoneNumber(db, result.cellphone);
+    const treated = await this.validator.treatString(db, result);
 
     await this.contactRepository.insertOne(db, result);
     return {
       detail: `User registered for DB: ${db === "macapa" ? "MYSQL/MACAPÁ" : "POSTGRESQL/VAREJÂO"}`,
-      contact: `Usuário: ${result.name}, Telefone: ${treatedPhoneNumber}`,
+      contact: `Usuário: ${result.name}, Telefone: ${treated.cellphone}`,
     };
   }
 
@@ -49,5 +50,19 @@ export class ContactService {
   // fetch from msql
   public async fetchFromVar(): Promise<ContactVar[]> {
     return this.contactRepository.fetchFromVar();
+  }
+
+  // seed db
+  public async seedDb(): Promise<any> {
+    const msqlContacts = JSON.parse(fs.readFileSync("dataseed/contacts-macapa.json", "utf-8"));
+    const pgContacts = JSON.parse(fs.readFileSync("dataseed/contacts-varejao.json", "utf-8"));
+
+    const msqlTreated: ContactDTO[] = [];
+    msqlContacts.map((contact: ContactDTO) => {
+      const treated = this.validator.treatString("macapa", contact);
+      msqlTreated.push({ name: treated.name, cellphone: treated.cellphone });
+    });
+
+    return this.contactRepository.seedDb(msqlTreated, pgContacts);
   }
 }

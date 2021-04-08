@@ -33,6 +33,10 @@ $ npm run start
 
 Ao iniciar a aplicação, realizar uma requisição POST no endpoint "/client" para gerar os clientes dos bancos "Macapá"(MySQL) e "VareJão"(PostgreSQL) conforme orientado.
 
+## Seeder
+
+Para alimentar os respectivos bancos automaticamente com os contatos fornecidos em JSON, realizar um POST request no endpoint "/seed".
+
 ## Swagger Authentication
 
 Após gerar os clientes e logar na API utilizando o endpoint "/auth/signin", clicar no botão "Authorize" no canto superior direito e adicionar o token APÓS a palavra "Bearer" e clicar em "Authorize".

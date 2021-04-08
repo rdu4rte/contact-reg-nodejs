@@ -118,4 +118,26 @@ export class ContactController extends BaseHttpController {
       });
     }
   }
+
+  @ApiOperationPost({
+    description: "Seed DB",
+    path: "/seed",
+    parameters: {},
+    responses: {
+      201: { description: "Contact Successfully Seeded" },
+      500: { description: "Failed To Seed Contacts" },
+    },
+  })
+  @httpPost("/seed")
+  public async seedDb(req: Request, res: Response, next: NextFunction): Promise<JsonResult> {
+    try {
+      const results = await this.contactService.seedDb();
+      return this.json(results, 201);
+    } catch (err) {
+      return this.json({
+        statusCode: 500,
+        message: `Failed to seed DBs: ${err.message}`,
+      });
+    }
+  }
 }

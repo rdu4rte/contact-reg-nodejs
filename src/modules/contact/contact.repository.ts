@@ -69,4 +69,29 @@ export class ContactRepository {
   public async fetchFromVar(): Promise<ContactVar[]> {
     return this.connVar.createQueryBuilder(ContactVar, "contact").getMany();
   }
+
+  // seed db
+  public async seedDb(msqlSeed: ContactDTO[], pgSeed: ContactDTO[]): Promise<any> {
+    const macapaResults = await this.connMac
+      .createQueryBuilder()
+      .insert()
+      .into(ContactMac)
+      .values(msqlSeed)
+      .execute()
+      .then((value: InsertResult) => {
+        return value;
+      });
+
+    const varejaoResults = await this.connVar
+      .createQueryBuilder()
+      .insert()
+      .into(ContactVar)
+      .values(pgSeed)
+      .execute()
+      .then((value: InsertResult) => {
+        return value;
+      });
+
+    return { detail: "Macapá and VareJão seeded" };
+  }
 }

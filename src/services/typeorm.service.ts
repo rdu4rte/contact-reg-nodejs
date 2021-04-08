@@ -32,7 +32,7 @@ export const config1: ConnectionOptions = <ConnectionOptions>{
   password: pgPass,
   database: pgDb,
   synchronize: true,
-  entities: [__dirname + "../../dist/src/modules/**/entity/*-var.entity.js"],
+  entities: ["src/modules/**/entity/*-var.entity.ts"],
   seeds: ["databaseed/"],
 };
 
@@ -45,6 +45,6 @@ export const config2: ConnectionOptions = <ConnectionOptions>{
   password: msqlPass,
   database: msqlDb,
   synchronize: true,
-  entities: [__dirname + "../../dist/src/modules/**/entity/*-mac.entity.js"],
+  entities: ["src/modules/**/entity/*-mac.entity.ts"],
   seeds: ["databaseed/"],
 };
