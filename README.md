@@ -24,5 +24,10 @@ $ npm run build
 # production
 $ npm run start
 ```
-# Autor
+
+## Endpoints
+- Root: https:localhost:3003/api/v1/
+- Swagger Docs: http://127.0.0.1:3003/api-docs/swagger
+
+## Autor
 Raul Duarte
